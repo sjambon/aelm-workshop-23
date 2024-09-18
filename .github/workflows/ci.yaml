@@ -7,11 +7,12 @@ on:
 
 env:
   GOLANG_VERSION: 1.21.x
+  DOCKER_REPOSITORY: sjambon
+  DOCKER_IMAGE: aelm-workshop-24
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    # Code Build steps
     steps:
       - uses: actions/checkout@v4
       - name: Setup Go ${{ env.GOLANG_VERSION }}
@@ -19,5 +20,5 @@ jobs:
         with:
           go-version: ${{ env.GOLANG_VERSION }}
       - name: Build
-        run: go build -o ../bin/workshop -v ./...
+        run: go build
         working-directory: workshop-service
