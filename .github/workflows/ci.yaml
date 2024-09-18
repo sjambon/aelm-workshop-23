@@ -20,7 +20,7 @@ jobs:
         with:
           go-version: ${{ env.GOLANG_VERSION }}
       - name: Build
-        run: go build
+        run: go build -o ../bin/workshop -v ./...
         working-directory: workshop-service
 
   docker:
