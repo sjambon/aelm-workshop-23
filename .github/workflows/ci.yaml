@@ -22,12 +22,22 @@ jobs:
       - name: Build
         run: go build -o ../bin/workshop -v ./...
         working-directory: workshop-service
-
+      - name: Upload /bin folder as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: workshop
+          path: bin/
+          retention-days: 1
   docker:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: workshop
+          path: ./bin
       - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
